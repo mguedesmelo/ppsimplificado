@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Service;
 
 import br.com.pp.simplificado.exception.BusinessException;
@@ -11,6 +12,7 @@ import br.com.pp.simplificado.model.data.User;
 import br.com.pp.simplificado.model.data.UserType;
 import br.com.pp.simplificado.model.dto.UserDto;
 import br.com.pp.simplificado.model.repository.UserRepository;
+import jakarta.persistence.LockModeType;
 
 @Service
 public class UserService extends BaseService {
@@ -26,6 +28,7 @@ public class UserService extends BaseService {
 		}
 	}
 	
+	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	public User findById(Long id) throws BusinessException {
 		return this.userRepository.findById(id).orElseThrow(() -> new BusinessException("Usuário não localizado"));
 	}
@@ -35,7 +38,7 @@ public class UserService extends BaseService {
 	}
 	
 	public User save(User user) throws BusinessException {
-		if (this.userRepository.findByDocument(user.getDocument()) != null) {
+		if (user.atInsertMode() && this.userRepository.findByDocument(user.getDocument()) != null) {
 			throw new BusinessException("Já existe um usuário com o documento informado");
 		}
 		return this.userRepository.save(user);
