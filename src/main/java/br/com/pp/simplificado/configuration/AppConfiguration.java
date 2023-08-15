@@ -33,8 +33,6 @@ public class AppConfiguration implements WebMvcConfigurer {
 //       messageSource.setBasenames("messages");
        toReturn.setDefaultEncoding("UTF-8");
        return toReturn;
-//        ResourceBundleMessageSource source = new ResourceBundleMessageSource();
-//        return source;
     }
 
     @Bean
