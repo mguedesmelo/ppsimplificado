@@ -27,7 +27,7 @@ public class TransactionController {
 		Transaction transaction = this.transactionService.save(transactionDto);
 		return new ResponseEntity<Transaction>(transaction, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/all")
 	public ResponseEntity<List<Transaction>> findAll() {
 		List<Transaction> toReturn = this.transactionService.findAll();

@@ -43,7 +43,7 @@ public abstract class BaseEntity implements Serializable {
         return this.dateCreation.format(DateTimeFormatter.ofPattern(
         		Constants.FORMAT_PATTERN_DATETIME));
     }
-    
+   
     public boolean atInsertMode() {
     	return this.id == null;
     }

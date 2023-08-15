@@ -23,7 +23,7 @@ public class TransactionService extends BaseService {
 	private AuthorizeTransactionService authorizeTransactionService;
 	@Autowired
 	private NotificationService notificationService;
-	
+
 	@Transactional
 	public Transaction save(TransactionDto transactionDto) throws BusinessException {
 		User payer = this.userService.findById(transactionDto.payerId());
@@ -48,7 +48,7 @@ public class TransactionService extends BaseService {
 
 		return this.transactionRepository.save(transaction);
 	}
-	
+
 	public List<Transaction> findAll() {
 		return this.transactionRepository.findAll();
 	}

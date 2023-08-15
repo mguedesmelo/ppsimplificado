@@ -27,11 +27,11 @@ public class Transaction extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "payer_id", nullable = false)
 	private User payer;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "payee_id", nullable = false)
 	private User payee;
-	
+
 	@Column(name = "ammount")
 	private BigDecimal ammount;
 }

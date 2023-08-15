@@ -20,7 +20,7 @@ public class AuthorizeTransactionService {
 	@SuppressWarnings("rawtypes")
 	public boolean authorize(User payer, BigDecimal ammount) {
 		ResponseEntity<Map> response = this.restTemplate.getForEntity(
-				Constants.REST_URL_AUTH_TRANSACTION, Map.class);
+				Constants.URL_REST_AUTH_TRANSACTION, Map.class);
 		return (response.getStatusCode().equals(HttpStatus.OK) && response.getBody().get("message").toString().equalsIgnoreCase("Autorizado"));
 	}
 }

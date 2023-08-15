@@ -39,13 +39,13 @@ public class User extends BaseEntity {
 
     @Column(name = "balance")
 	private BigDecimal balance;
-	
+
 	@Column(name = "document", unique = true)
 	private String document;
-	
+
     @Enumerated(EnumType.STRING)
 	private UserType userType;
-    
+   
     public User(UserDto userDto) {
     	this(userDto.firstName(), userDto.lastName(), userDto.email(), userDto.password(), 
     			userDto.balance(), userDto.document(), userDto.userType());

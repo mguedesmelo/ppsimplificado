@@ -9,14 +9,14 @@ import br.com.pp.simplificado.model.data.User;
 public class NotificationService extends BaseService {
 //	@Autowired
 //	private RestTemplate restTemplate;
-	
+
 	public void notify(User user, String message) throws BusinessException {
 		System.out.println(message);
-		
+
 //		String email = user.getEmail();
-		
+
 //		NotificationDto notificationDto = new NotificationDto(email, message);
-		
+
 //		ResponseEntity<String> responseEntity = this.restTemplate.postForEntity(
 //				Constants.REST_URL_NOTIFICATION, notificationDto, String.class);
 //		if (responseEntity.getStatusCode() != HttpStatus.OK) {

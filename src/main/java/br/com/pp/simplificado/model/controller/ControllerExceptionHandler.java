@@ -14,7 +14,7 @@ public class ControllerExceptionHandler {
 		ExceptionDto exceptionDto = new ExceptionDto("400", businessException.getMessage());
 		return ResponseEntity.badRequest().body(exceptionDto);
 	}
-	
+
 	@ExceptionHandler(Throwable.class)
 	public ResponseEntity<ExceptionDto> threatThrowable(Throwable throwable) {
 		ExceptionDto exceptionDto = new ExceptionDto("400", "Erro inesperado");

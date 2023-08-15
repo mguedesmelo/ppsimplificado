@@ -27,7 +27,7 @@ public class UserService extends BaseService {
 			throw new BusinessException("Saldo insuficiente");
 		}
 	}
-	
+
 	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	public User findById(Long id) throws BusinessException {
 		return this.userRepository.findById(id).orElseThrow(() -> new BusinessException("Usuário não localizado"));
@@ -36,7 +36,7 @@ public class UserService extends BaseService {
 	public User save(UserDto userDto) throws BusinessException {
 		return this.save(new User(userDto));
 	}
-	
+
 	public User save(User user) throws BusinessException {
 		if (user.atInsertMode() && this.userRepository.findByDocument(user.getDocument()) != null) {
 			throw new BusinessException("Já existe um usuário com o documento informado");
