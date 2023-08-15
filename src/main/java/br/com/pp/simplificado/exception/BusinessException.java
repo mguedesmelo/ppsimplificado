@@ -1,20 +1,12 @@
 package br.com.pp.simplificado.exception;
 
-import java.util.Locale;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.context.support.ResourceBundleMessageSource;
+import br.com.pp.simplificado.configuration.MessageResources;
 
 public class BusinessException extends Exception {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -5271264973005114027L;
-    private Locale locale = LocaleContextHolder.getLocale();
-
-	@Autowired
-    private ResourceBundleMessageSource source;
 
 	public BusinessException(String message) {
 		super(message);
@@ -22,8 +14,6 @@ public class BusinessException extends Exception {
 
 	@Override
 	public String getMessage() {
-		// TODO Habilitar i18n
-//		return this.source.getMessage(super.getMessage(), null, locale);
-		return super.getMessage();
+		return MessageResources.getText(super.getMessage());
 	}
 }
