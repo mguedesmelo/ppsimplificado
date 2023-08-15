@@ -33,7 +33,7 @@ public class TransactionService extends BaseService {
 		this.userService.validateTransaction(payer, value);
 
 		if (this.authorizeTransactionService.authorize(payer, value) == false) {
-			throw new BusinessException("Transação não autorizada");
+			throw new BusinessException("transaction.not.authorized");
 		}
 
 		Transaction transaction = new Transaction(payer, payee, value);

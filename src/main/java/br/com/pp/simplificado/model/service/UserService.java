@@ -21,16 +21,16 @@ public class UserService extends BaseService {
 
 	public void validateTransaction(User payer, BigDecimal ammount) throws BusinessException {
 		if (UserType.MERCHANT.equals(payer.getUserType())) {
-			throw new BusinessException("Não é permitido ao lojista realizar transferências");
+			throw new BusinessException("user.merchant.cannot.transfer");
 		}
 		if (payer.getBalance().compareTo(ammount) < 0) {
-			throw new BusinessException("Saldo insuficiente");
+			throw new BusinessException("user.balance.not.enough");
 		}
 	}
 
 	@Lock(LockModeType.PESSIMISTIC_WRITE)
 	public User findById(Long id) throws BusinessException {
-		return this.userRepository.findById(id).orElseThrow(() -> new BusinessException("Usuário não localizado"));
+		return this.userRepository.findById(id).orElseThrow(() -> new BusinessException("user.not.found"));
 	}
 
 	public User save(UserDto userDto) throws BusinessException {
@@ -39,7 +39,7 @@ public class UserService extends BaseService {
 
 	public User save(User user) throws BusinessException {
 		if (user.atInsertMode() && this.userRepository.findByDocument(user.getDocument()) != null) {
-			throw new BusinessException("Já existe um usuário com o documento informado");
+			throw new BusinessException("user.document.exists");
 		}
 		return this.userRepository.save(user);
 	}
