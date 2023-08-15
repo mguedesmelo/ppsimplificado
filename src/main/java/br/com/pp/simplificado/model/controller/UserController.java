@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.pp.simplificado.exception.BusinessException;
 import br.com.pp.simplificado.model.data.User;
 import br.com.pp.simplificado.model.dto.UserDto;
 import br.com.pp.simplificado.model.service.UserService;
@@ -22,7 +23,7 @@ public class UserController {
 	private UserService userService;
 
 	@PostMapping("/save")
-	public ResponseEntity<User> save(@RequestBody UserDto userDto) {
+	public ResponseEntity<User> save(@RequestBody UserDto userDto) throws BusinessException {
 		User user = this.userService.save(userDto);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}

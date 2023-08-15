@@ -30,11 +30,14 @@ public class UserService extends BaseService {
 		return this.userRepository.findById(id).orElseThrow(() -> new BusinessException("Usuário não localizado"));
 	}
 
-	public User save(UserDto userDto) {
+	public User save(UserDto userDto) throws BusinessException {
 		return this.save(new User(userDto));
 	}
 	
-	public User save(User user) {
+	public User save(User user) throws BusinessException {
+		if (this.userRepository.findByDocument(user.getDocument()) != null) {
+			throw new BusinessException("Já existe um usuário com o documento informado");
+		}
 		return this.userRepository.save(user);
 	}
 
