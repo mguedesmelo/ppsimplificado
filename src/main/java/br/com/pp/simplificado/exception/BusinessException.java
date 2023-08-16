@@ -14,6 +14,7 @@ public class BusinessException extends Exception {
 
 	@Override
 	public String getMessage() {
+		// TODO Testar mudando o locale
 		return MessageResources.getText(super.getMessage());
 	}
 }
