@@ -21,7 +21,6 @@ public class AppConfiguration implements WebMvcConfigurer {
 
     @Bean
     LocaleResolver localeResolver() {
-//    	SessionLocaleResolver toReturn = new SessionLocaleResolver();
     	AcceptHeaderLocaleResolver toReturn = new AcceptHeaderLocaleResolver();
         toReturn.setDefaultLocale(new Locale("pt", "BR"));
         return toReturn;
@@ -30,7 +29,6 @@ public class AppConfiguration implements WebMvcConfigurer {
     @Bean
     ResourceBundleMessageSource messageSource() {
     	ResourceBundleMessageSource toReturn = new ResourceBundleMessageSource();
-//       messageSource.setBasenames("messages");
        toReturn.setDefaultEncoding("UTF-8");
        return toReturn;
     }
@@ -38,7 +36,6 @@ public class AppConfiguration implements WebMvcConfigurer {
     @Bean
     LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor toReturn = new LocaleChangeInterceptor();
-//        toReturn.setParamName("lang");
         return toReturn;
     }
 

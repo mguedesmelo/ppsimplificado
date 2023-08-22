@@ -5,6 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Lock;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.pp.simplificado.exception.BusinessException;
@@ -15,7 +19,7 @@ import br.com.pp.simplificado.model.repository.UserRepository;
 import jakarta.persistence.LockModeType;
 
 @Service
-public class UserService extends BaseService {
+public class UserService extends BaseService implements UserDetailsService {
 	@Autowired
 	private UserRepository userRepository;
 
@@ -39,12 +43,21 @@ public class UserService extends BaseService {
 
 	public User save(User user) throws BusinessException {
 		if (user.atInsertMode() && this.userRepository.findByDocument(user.getDocument()) != null) {
-			throw new BusinessException("user.document.exists");
+			if (this.userRepository.findByDocument(user.getDocument()) != null) {
+				throw new BusinessException("user.document.exists");
+			}
+			String encryptedPassword = new BCryptPasswordEncoder().encode(user.getPassword());
+			user.setPassword(encryptedPassword);
 		}
 		return this.userRepository.save(user);
 	}
 
 	public List<User> findAll() {
 		return this.userRepository.findAll();
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return this.userRepository.findByEmail(username);
 	}
 }

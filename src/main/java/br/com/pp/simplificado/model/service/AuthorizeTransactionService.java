@@ -13,7 +13,7 @@ import br.com.pp.simplificado.configuration.Constants;
 import br.com.pp.simplificado.model.data.User;
 
 @Service
-public class AuthorizeTransactionService {
+public class AuthorizeTransactionService extends BaseService {
 	@Autowired
 	private RestTemplate restTemplate;
 
