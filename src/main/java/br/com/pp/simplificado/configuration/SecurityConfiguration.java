@@ -26,12 +26,27 @@ public class SecurityConfiguration {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+    	/*
+    	 PRECISA ESTAR AUTENTICADO
+    	 http://localhost:8080/user/all
+    	 http://localhost:8080/transaction/all
+    	 http://localhost:8080/transaction/save
+    	 
+    	 PRECISA SER DA ROLE ADMIN MAS NÃO PRECISA ESTAR AUTENTICADO
+    	 http://localhost:8080/user/save
+    	 
+    	 NÃO PRECISA ESTAR AUTENTICADO
+    	 http://localhost:8080/user/login
+    	 * */
         return httpSecurity
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                 		.requestMatchers(antMatcher(HttpMethod.POST, "/user/login")).permitAll()
-                        .requestMatchers(antMatcher(HttpMethod.POST, "/user/save")).hasRole("Admin")
+                        .requestMatchers(antMatcher(HttpMethod.POST, "/user/save")).hasAnyRole(
+                        		Constants.ROLE_ADMIN, 
+                        		Constants.ROLE_ADMIN.toUpperCase(), 
+                        		Constants.ROLE_ADMIN.toLowerCase())
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

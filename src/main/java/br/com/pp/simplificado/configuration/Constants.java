@@ -5,4 +5,6 @@ public class Constants {
     public static final String URL_REST_NOTIFICATION = "http://o4d9z.mocklab.io/notify";
 
     public static final String FORMAT_PATTERN_DATETIME = "dd/MM/yyyy HH:mm:ss";
+    
+    public static final String ROLE_ADMIN = "Admin";
 }
