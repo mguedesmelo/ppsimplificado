@@ -1,4 +1,5 @@
 package br.com.pp.simplificado.configuration;
+
 import java.util.ResourceBundle;
 
 public final class MessageResources {
